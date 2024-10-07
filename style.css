@@ -33,6 +33,10 @@ isolation: isolate;
     --lighten-yellow: #F2B138;
 }
 
+.disabled {
+    display: none !important;
+}
+
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -50,9 +54,9 @@ body {
 }
 
 .startContainer {
-    width: clamp(25rem, 28rem, 30rem);
-    height: clamp(10rem, 14rem, 18rem);
-    border-radius: 1rem;
+    width: clamp(28rem, 30rem, 32rem);
+    height: clamp(12rem, 16rem, 18rem);
+    border-radius: 0.5rem;
     box-shadow: 0 1rem 1rem 1rem rgba(0, 0, 0, 0.1);
     background-color: var(--secondary);
     display: flex;
@@ -63,10 +67,29 @@ body {
 }
 
 .selectionContainer {
-    width: clamp(21rem, 24rem, 26rem);
+    width: clamp(24rem, 26rem, 28rem);
     height: clamp(5rem, 8rem, 10rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     border-radius: 1rem;
     background-color: var(--primary);
-
+    margin: 1rem auto;
 }
 
+.button {
+    border-radius: 1rem;
+    background-color: var(--primary);
+    margin: 2rem auto;
+}
+
+.circle, .cross {
+    font-size: 5rem;
+    width: clamp(11rem, 12rem, 13rem);
+    height: clamp(4rem, 7rem, 9rem);
+    border-radius: 1rem;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
