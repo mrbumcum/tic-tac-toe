@@ -93,3 +93,10 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.circle:hover, .cross:hover {
+    color: var(--primary);
+    background-color: var(--grey);
+    cursor: pointer;
+    transition: 0.3s;
+}
