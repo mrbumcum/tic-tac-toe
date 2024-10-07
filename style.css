@@ -100,3 +100,18 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
+
+.startButton {
+    display: block;
+    margin: 0 auto; 
+    border-radius: 0.5rem;
+    background-color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: var(--lighten-yellow);
+    color: var(--primary);
+    box-shadow: 0 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+}
