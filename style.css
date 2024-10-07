@@ -10,6 +10,9 @@ margin: 0;
 body {
 line-height: 1.5;
 -webkit-font-smoothing: antialiased;
+font-family: 'Outfit', sans-serif;
+background-color: rgb(26, 43, 51);
+color: rgb(169, 190, 200);
 }
 
 img, picture, video, canvas, svg {
@@ -28,3 +31,20 @@ overflow-wrap: break-word;
 #root, #__next {
 isolation: isolate;
 }
+
+.header {
+    left: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.startContainer {
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100vh; /* Full height to center vertically */
+}
+
