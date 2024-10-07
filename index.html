@@ -8,25 +8,52 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Tic Tac Toe</h1>
-        </div>
-
-        <div class="startContainer">
-            <h3 class="pickSymbol">Pick a symbol</h3>
-            <div class="selectionContainer">
-                <div class="circle">
-                    O
-                </div>
-                <div class="cross">
-                    X
-                </div>  
+        <div class="welcomeScreen disabled">
+            <div class="header">
+                <h1>Tic Tac Toe</h1>
             </div>
-            <p class="pickSymbol">Remember: X goes first</p>
+            <div class="startContainer">
+                <h3 class="pickSymbol">Pick a symbol</h3>
+                <div class="selectionContainer">
+                    <div class="circle">
+                        O
+                    </div>
+                    <div class="cross">
+                        X
+                    </div>
+                </div>
+                <p class="pickSymbol">Remember: X goes first</p>
+            </div>
+            <button type="button" class="startButton">Start Game</button>
         </div>
 
-        <button type="button" class="startButton">Start Game</button>
+
+        <div>
+            <div class="header gsHeader">
+                <h1>Tic Tac Toe</h1>
+                <div class="playerTurn">X Turn</div>
+                <button type="button" class="restartButton">
+                    <svg
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24px"
+                      height="24px"
+                    >
+                      <path
+                        fill="#A9BEC8"5
+                        stroke-width="100%"
+                        d="M12 5V1L7 6l5 5V7a6 6 0 0 1 6 6a6 6 0 0 1-6 6a6 6 0 0 1-6-6H4a8 8 0 0 0 8 8a8 8 0 0 0 8-8a8 8 0 0 0-8-8"
+                      />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

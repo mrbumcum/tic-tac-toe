@@ -122,3 +122,36 @@ body {
     transition: 0.3s;
 }
 
+/* Game Screen */
+
+.gsHeader {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 4rem;
+}
+
+.playerTurn {
+    width: 10rem;
+    border-radius: .5rem;
+    background-color: var(--secondary);
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+    font-weight: 1000;
+    color: var(--grey);
+    box-shadow: 0 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.restartButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    border-radius: .5rem;
+    background-color: var(--secondary);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: var(--grey);
+    box-shadow: 0 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+}
