@@ -45,6 +45,11 @@ body {
     color: var(--grey);
     }
 
+.container {
+    height: 100vh;
+    width: 100vw;
+}
+
 .header {
     left: 0;
     top: 0;
@@ -124,12 +129,29 @@ body {
 
 /* Game Screen */
 
+.gameScreen {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0; 
+}
+
 .gsHeader {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    margin-top: 4rem;
-    gap: 0;
+    gap: clamp(6rem, 2vw, 3rem);
+    margin-top: 0;
+    margin-bottom: 2rem; 
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 1000;
+    text-align: center;
 }
 
 .playerTurn {
@@ -137,7 +159,8 @@ body {
     border-radius: .5rem;
     background-color: var(--secondary);
     border: none;
-    padding: 0.5rem 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     font-size: 1.3rem;
     font-weight: 1000;
     color: var(--grey);
@@ -168,3 +191,15 @@ body {
 .restartButton:hover svg path{
     fill: #1A2B33;
 }
+
+.gameGrid {
+    display: grid;
+    background-color: red;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.5rem;    
+    margin: 2rem auto; 
+    width: clamp(24rem, 26rem, 28rem);
+    height: clamp(24rem, 26rem, 28rem);
+}
+
