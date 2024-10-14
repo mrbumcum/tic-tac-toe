@@ -39,18 +39,20 @@ const welcomeScreen = (function () {
     }
 })();
 
-const gameBoard = (function () {
+const player = (function () {
     const boardElement = document.querySelector('.gameGrid');
     const cells = Array.from(document.querySelectorAll('.cell'));
     const playerScore = document.getElementById('playerScore');
     const computerScore = document.getElementById('computerScore');
-
+    const restartButton = document.querySelector('.restartButton');
     const board = ['', '', '', '', '', '', '', '', ''];
 
     const handleCellClick = function (event) {
         const cell = event.target;
         const cellIndex = cells.indexOf(cell); // Corrected: Use cells array to find the index
-        updateBoard(cellIndex, 'X');
+        if (board[cellIndex] === '') {
+            updateBoard(cellIndex, 'X');
+        }
     };
 
     const updateBoard = function (index, symbol) {
@@ -60,9 +62,19 @@ const gameBoard = (function () {
 
     const renderBoard = function (index, symbol) {
         document.querySelector(`.cell${index}`).textContent = symbol;
-    }
+    };
+
+    const handleRestartClick = function () {
+        board.fill('');
+        cells.forEach(cell => {
+            cell.textContent = '';
+        });
+    };
 
     cells.forEach(cell => {
         cell.addEventListener('click', handleCellClick);
     });
+
+    restartButton.addEventListener('click', handleRestartClick);
 })();
+
