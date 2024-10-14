@@ -57,18 +57,4 @@ const gameBoard = (function () {
         [2, 4, 6]
     ];
 
-    this.cacheDom = function () { 
-        this.boardElement = document.querySelector('.gameGrid');
-        this.cells = Array.from(document.querySelectorAll('.cell'));
-        this.playerScore = document.getElementById('playerScore');
-        this.computerScore = document.getElementById('computerScore');
-        
-        this.bindEvents();
-    };
-
-    this.bindEvents = function () {
-        this.cells.forEach(cell => {
-            cell.addEventListener('click', this.handleCellClick.bind(this));
-        });
-    };
 })();
