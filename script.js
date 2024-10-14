@@ -25,7 +25,7 @@ const welcomeScreen = (function () {
         circle.classList.remove('selected');
         cross.classList.remove('selected');
         selected.classList.add('selected');
-        chosenSymbol = selected === circle ? 'circle' : 'cross';
+        chosenSymbol = selected === circle ? 'O' : 'X';
     }
 
     circle.addEventListener('click', handleCircleClick);
@@ -35,7 +35,7 @@ const welcomeScreen = (function () {
     return {
         getChosenSymbol: function() {
             return chosenSymbol;
-        }
+        },
     }
 })();
 
@@ -44,13 +44,15 @@ const gameBoard = (function () {
     const playerScore = document.getElementById('playerScore');
     const computerScore = document.getElementById('computerScore');
     const restartButton = document.querySelector('.restartButton');
+    let playerSymbol;
     const board = ['', '', '', '', '', '', '', '', ''];
 
     const handleCellClick = function (event) {
+        playerSymbol = welcomeScreen.getChosenSymbol();
         const cell = event.target;
         const cellIndex = cells.indexOf(cell);
         if (board[cellIndex] === '') {
-            updateBoard(cellIndex, 'X');
+            updateBoard(cellIndex, playerSymbol);
         }
     };
 
