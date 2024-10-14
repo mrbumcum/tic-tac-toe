@@ -101,11 +101,16 @@ body {
     justify-content: center;
 }
 
-.circle:hover, .cross:hover {
+.circle:hover, .cross:hover{
     color: var(--primary);
     background-color: var(--grey);
     cursor: pointer;
     transition: 0.3s;
+}
+
+.selected {
+    color: var(--primary);
+    background-color: var(--grey);
 }
 
 .startButton {
