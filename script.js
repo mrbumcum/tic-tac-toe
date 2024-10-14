@@ -40,21 +40,29 @@ const welcomeScreen = (function () {
 })();
 
 const gameBoard = (function () {
-    const board = [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-    ];
+    const boardElement = document.querySelector('.gameGrid');
+    const cells = Array.from(document.querySelectorAll('.cell'));
+    const playerScore = document.getElementById('playerScore');
+    const computerScore = document.getElementById('computerScore');
 
-    const winningConditions = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ];
+    const board = ['', '', '', '', '', '', '', '', ''];
 
+    const handleCellClick = function (event) {
+        const cell = event.target;
+        const cellIndex = cells.indexOf(cell); // Corrected: Use cells array to find the index
+        updateBoard(cellIndex, 'X');
+    };
+
+    const updateBoard = function (index, symbol) {
+        board[index] = symbol;
+        renderBoard(index, symbol);
+    };
+
+    const renderBoard = function (index, symbol) {
+        document.querySelector(`.cell${index}`).textContent = symbol;
+    }
+
+    cells.forEach(cell => {
+        cell.addEventListener('click', handleCellClick);
+    });
 })();
