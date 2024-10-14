@@ -39,8 +39,7 @@ const welcomeScreen = (function () {
     }
 })();
 
-const player = (function () {
-    const boardElement = document.querySelector('.gameGrid');
+const gameBoard = (function () {
     const cells = Array.from(document.querySelectorAll('.cell'));
     const playerScore = document.getElementById('playerScore');
     const computerScore = document.getElementById('computerScore');
@@ -49,7 +48,7 @@ const player = (function () {
 
     const handleCellClick = function (event) {
         const cell = event.target;
-        const cellIndex = cells.indexOf(cell); // Corrected: Use cells array to find the index
+        const cellIndex = cells.indexOf(cell);
         if (board[cellIndex] === '') {
             updateBoard(cellIndex, 'X');
         }
@@ -58,6 +57,11 @@ const player = (function () {
     const updateBoard = function (index, symbol) {
         board[index] = symbol;
         renderBoard(index, symbol);
+        
+        if (winningCondition(symbol)) {
+            console.log('winner');
+            handleRestartClick();
+        }
     };
 
     const renderBoard = function (index, symbol) {
@@ -76,5 +80,22 @@ const player = (function () {
     });
 
     restartButton.addEventListener('click', handleRestartClick);
+
+    const winningCondition = function (symbol) {
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        return winConditions.some(condition => 
+            condition.every(index => board[index] === symbol)
+        );
+    };
 })();
 
