@@ -106,7 +106,6 @@ const gameBoard = (function () {
         winningCondition: winningCondition,
         getBoard: getBoard,
         getCells: getCells,
-        // Add these new methods to the returned object
         getPlayerScore: function() { return playerScoreValue; },
         getComputerScore: function() { return computerScoreValue; },
     }
