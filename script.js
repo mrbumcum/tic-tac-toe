@@ -41,19 +41,15 @@ const welcomeScreen = (function () {
 
 const gameBoard = (function () {
     const cells = Array.from(document.querySelectorAll('.cell'));
-    const playerScore = document.getElementById('playerScore');
-    const computerScore = document.getElementById('computerScore');
     const restartButton = document.querySelector('.restartButton');
-    let playerSymbol;
     const board = ['', '', '', '', '', '', '', '', ''];
 
-    const handleCellClick = function (event) {
-        playerSymbol = welcomeScreen.getChosenSymbol();
-        const cell = event.target;
-        const cellIndex = cells.indexOf(cell);
-        if (board[cellIndex] === '') {
-            updateBoard(cellIndex, playerSymbol);
-        }
+    const getCells = function () {
+        return cells;
+    };
+
+    const getBoard = function () {
+        return board;
     };
 
     const updateBoard = function (index, symbol) {
@@ -77,10 +73,6 @@ const gameBoard = (function () {
         });
     };
 
-    cells.forEach(cell => {
-        cell.addEventListener('click', handleCellClick);
-    });
-
     restartButton.addEventListener('click', handleRestartClick);
 
     const winningCondition = function (symbol) {
@@ -99,9 +91,39 @@ const gameBoard = (function () {
             condition.every(index => board[index] === symbol)
         );
     };
+
+    return {
+        updateBoard: updateBoard,
+        winningCondition: winningCondition,
+        getBoard: getBoard,
+        getCells: getCells,
+    }
 })();
 
-const computePlayer = (function () {
+const player = (function () {
+    let playerSymbol;
+    
+    const handleCellClick = function (event) {
+        playerSymbol = welcomeScreen.getChosenSymbol();
+        const cell = event.target;
+        const cellIndex = gameBoard.getCells().indexOf(cell);
+        if (gameBoard.getBoard()[cellIndex] === '') {
+            gameBoard.updateBoard(cellIndex, playerSymbol);
+            computerPlayer.makeMove(gameBoard.getBoard());
+        }
+    };
+
+
+    gameBoard.getCells().forEach(cell => {
+        cell.addEventListener('click', handleCellClick);
+    });
+
+    return {
+        handleCellClick: handleCellClick
+    }
+})();
+    
+const computerPlayer = (function () {
     const computerSymbol = welcomeScreen.getChosenSymbol() === 'O' ? 'X' : 'O';
 
     const makeMove = function(board) {
@@ -129,9 +151,12 @@ const computePlayer = (function () {
     };
 
     const minimax = function(board, depth, isMaximizing) {
-        const result = checkWinner(board);
-        if (result !== null) {
-            return result === computerSymbol ? 10 - depth : depth - 10;
+        if (gameBoard.winningCondition(computerSymbol)) {
+            return 10 - depth;
+        } else if (gameBoard.winningCondition(welcomeScreen.getChosenSymbol())) {
+            return depth - 10;
+        } else if (board.every(cell => cell !== '')) {
+            return 0; // It's a tie
         }
 
         if (isMaximizing) {
@@ -149,7 +174,7 @@ const computePlayer = (function () {
             let bestScore = Infinity;
             for (let i = 0; i < board.length; i++) {
                 if (board[i] === '') {
-                    board[i] = 'O';
+                    board[i] = welcomeScreen.getChosenSymbol();
                     let score = minimax(board, depth + 1, true);
                     board[i] = '';
                     bestScore = Math.min(score, bestScore);
@@ -162,4 +187,4 @@ const computePlayer = (function () {
     return {
         makeMove: makeMove
     }
-});
+})();
