@@ -101,3 +101,65 @@ const gameBoard = (function () {
     };
 })();
 
+const computePlayer = (function () {
+    const computerSymbol = welcomeScreen.getChosenSymbol() === 'O' ? 'X' : 'O';
+
+    const makeMove = function(board) {
+        const bestMove = findBestMove(board);
+        gameBoard.updateBoard(bestMove, computerSymbol);
+    };
+
+    const findBestMove = function(board) {
+        let bestScore = -Infinity;
+        let bestMove;
+
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === '') {
+                board[i] = computerSymbol;
+                let score = minimax(board, 0, false);
+                board[i] = '';
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                }
+            }
+        }
+
+        return bestMove;
+    };
+
+    const minimax = function(board, depth, isMaximizing) {
+        const result = checkWinner(board);
+        if (result !== null) {
+            return result === computerSymbol ? 10 - depth : depth - 10;
+        }
+
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            for (let i = 0; i < board.length; i++) {
+                if (board[i] === '') {
+                    board[i] = computerSymbol;
+                    let score = minimax(board, depth + 1, false);
+                    board[i] = '';
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            let bestScore = Infinity;
+            for (let i = 0; i < board.length; i++) {
+                if (board[i] === '') {
+                    board[i] = 'O';
+                    let score = minimax(board, depth + 1, true);
+                    board[i] = '';
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
+        }
+    };
+
+    return {
+        makeMove: makeMove
+    }
+});
