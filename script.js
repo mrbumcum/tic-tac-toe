@@ -19,6 +19,8 @@ const welcomeScreen = (function () {
     const handleStartClick = function () {
         welcomeScreen.classList.add('disabled');
         gameScreen.classList.remove('disabled');
+
+        computerPlayer.makeMove(gameBoard.getBoard());
     };
 
     const updateSelection = function (selected) {
@@ -45,6 +47,7 @@ const gameBoard = (function () {
     const board = ['', '', '', '', '', '', '', '', ''];
     const playerScore = document.getElementById('playerScore');
     const computerScore = document.getElementById('computerScore');
+    const playerTurn = document.querySelector('.playerTurn');
     let playerScoreValue = 0;
     let computerScoreValue = 0;
     const getCells = function () {
@@ -82,6 +85,10 @@ const gameBoard = (function () {
         });
     };
 
+    const playerTurnTracker = function (symbol) {
+        playerTurn.textContent = `${symbol} Turn`;
+    };
+    
     restartButton.addEventListener('click', handleRestartClick);
 
     const winningCondition = function (symbol) {
@@ -108,6 +115,7 @@ const gameBoard = (function () {
         getCells: getCells,
         getPlayerScore: function() { return playerScoreValue; },
         getComputerScore: function() { return computerScoreValue; },
+        playerTurnTracker: playerTurnTracker,
     }
 })();
 
@@ -120,7 +128,8 @@ const player = (function () {
         const cellIndex = gameBoard.getCells().indexOf(cell);
         if (gameBoard.getBoard()[cellIndex] === '') {
             gameBoard.updateBoard(cellIndex, playerSymbol);
-            if (gameBoard.getBoard().some(cell => cell == '')) {
+            gameBoard.playerTurnTracker(computerPlayer.getComputerSymbol());
+            if (gameBoard.getBoard().some(cell => cell === '')) {
                 computerPlayer.makeMove(gameBoard.getBoard());
             }
         }
@@ -137,11 +146,17 @@ const player = (function () {
 })();
     
 const computerPlayer = (function () {
-    const computerSymbol = welcomeScreen.getChosenSymbol() === 'O' ? 'X' : 'O';
+    let computerSymbol;
+
+    const setComputerSymbol = function() {
+        computerSymbol = welcomeScreen.getChosenSymbol() === 'O' ? 'X' : 'O';
+    };
 
     const makeMove = function(board) {
+        setComputerSymbol(); // Ensure the computer symbol is set based on the current choice
         const bestMove = findBestMove(board);
         gameBoard.updateBoard(bestMove, computerSymbol);
+        gameBoard.playerTurnTracker(welcomeScreen.getChosenSymbol());
     };
 
     const findBestMove = function(board) {
@@ -198,6 +213,7 @@ const computerPlayer = (function () {
     };
 
     return {
-        makeMove: makeMove
+        makeMove: makeMove,
+        getComputerSymbol: function() { return computerSymbol; }
     }
 })();
