@@ -76,6 +76,9 @@ const gameBoard = (function () {
 
     const renderBoard = function (index, symbol) {
         document.querySelector(`.cell${index}`).textContent = symbol;
+        if (gameBoard.getBoard().every(cell => cell !== '')) {
+            handleRestartClick();
+        }
     };
 
     const handleRestartClick = function () {
