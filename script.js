@@ -120,7 +120,9 @@ const player = (function () {
         const cellIndex = gameBoard.getCells().indexOf(cell);
         if (gameBoard.getBoard()[cellIndex] === '') {
             gameBoard.updateBoard(cellIndex, playerSymbol);
-            computerPlayer.makeMove(gameBoard.getBoard());
+            if (gameBoard.getBoard().some(cell => cell == '')) {
+                computerPlayer.makeMove(gameBoard.getBoard());
+            }
         }
     };
 
