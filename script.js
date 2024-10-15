@@ -43,7 +43,10 @@ const gameBoard = (function () {
     const cells = Array.from(document.querySelectorAll('.cell'));
     const restartButton = document.querySelector('.restartButton');
     const board = ['', '', '', '', '', '', '', '', ''];
-
+    const playerScore = document.getElementById('playerScore');
+    const computerScore = document.getElementById('computerScore');
+    let playerScoreValue = 0;
+    let computerScoreValue = 0;
     const getCells = function () {
         return cells;
     };
@@ -57,7 +60,13 @@ const gameBoard = (function () {
         renderBoard(index, symbol);
         
         if (winningCondition(symbol)) {
-            console.log('winner');
+            if (symbol === welcomeScreen.getChosenSymbol()) {
+                playerScoreValue++;
+                playerScore.textContent = playerScoreValue;
+            } else {
+                computerScoreValue++;
+                computerScore.textContent = computerScoreValue;
+            }
             handleRestartClick();
         }
     };
@@ -97,6 +106,9 @@ const gameBoard = (function () {
         winningCondition: winningCondition,
         getBoard: getBoard,
         getCells: getCells,
+        // Add these new methods to the returned object
+        getPlayerScore: function() { return playerScoreValue; },
+        getComputerScore: function() { return computerScoreValue; },
     }
 })();
 
