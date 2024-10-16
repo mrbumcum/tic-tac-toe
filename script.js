@@ -133,7 +133,9 @@ const player = (function () {
             gameBoard.updateBoard(cellIndex, playerSymbol);
             gameBoard.playerTurnTracker(computerPlayer.getComputerSymbol());
             if (gameBoard.getBoard().some(cell => cell === '')) {
-                computerPlayer.makeMove(gameBoard.getBoard());
+                setTimeout(() => {
+                    computerPlayer.makeMove(gameBoard.getBoard());
+                }, 400); 
             }
         }
     };
